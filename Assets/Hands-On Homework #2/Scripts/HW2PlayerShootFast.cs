@@ -1,22 +1,22 @@
 using UnityEngine;
 
-public class HW2PlayerShoot : MonoBehaviour
+public class HW2PlayerShootFast : MonoBehaviour
 {
     public GameObject preFab;
     public Transform bulletTrash;
     public Transform bulletSpawn;
 
-    private const float Timer = 0.5f;
-    private float _currentTime = 0.5f;
+    private const float Timer = 0.9f;
+    private float _currentTime = 0.9f;
     private bool _canShoot = true;
 
-    private void Update()
+    void Update()
     {
         TimerMethod();
         Shoot();
     }
 
-    private void TimerMethod() 
+    private void TimerMethod()
     {
         if (!_canShoot)
         {
@@ -32,7 +32,7 @@ public class HW2PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _canShoot)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && _canShoot)
         {
             GameObject bullet = Instantiate(preFab, bulletSpawn.position, Quaternion.identity);
 
