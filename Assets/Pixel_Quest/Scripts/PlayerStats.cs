@@ -6,9 +6,18 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     private int CoinCounter = 0;
-    private int Health = 3;
+    public int _health = 3;
+    public int _maxHealth = 3;
 
     public Transform RespawnPoint;
+
+    private PlayerUIController _playerUIController;
+
+    private void Start()
+    {
+        _playerUIController = GetComponent<PlayerUIController>();
+        _playerUIController.UpdateHealth(_health, _maxHealth);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,9 +31,10 @@ public class PlayerStats : MonoBehaviour
                 }
             case "Death":
                 {
-                    Health--;
+                    _health--;
+                    _playerUIController.UpdateHealth(_health, _maxHealth);
 
-                    if (Health <= 0)
+                    if (_health <= 0)
                     {
                         string thisLevel = SceneManager.GetActiveScene().name;
                         SceneManager.LoadScene(thisLevel);
@@ -43,9 +53,10 @@ public class PlayerStats : MonoBehaviour
                 }
             case "Health":
                 {
-                    if (Health < 3)
+                    if (_health < 3)
                     {
-                        Health++;
+                        _health++;
+                        _playerUIController.UpdateHealth(_health, _maxHealth);
                         Destroy(collision.gameObject);
                     }
                     break;

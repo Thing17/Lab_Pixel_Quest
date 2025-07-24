@@ -15,7 +15,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
-        if (_rb.velocity.x == 0)
+        if (Input.GetAxis("Horizontal") == 0)
         {
             _animator.SetBool("isWalking", false);
         }
