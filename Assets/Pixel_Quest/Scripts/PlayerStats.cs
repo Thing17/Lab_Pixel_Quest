@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
-    private int CoinCounter = 0;
+    private int coinCounter = 0;
+    private int coinsInLevel = 0;
     public int _health = 3;
     public int _maxHealth = 3;
 
@@ -15,8 +16,10 @@ public class PlayerStats : MonoBehaviour
 
     private void Start()
     {
+        coinsInLevel = GameObject.Find("Coins").transform.childCount;
         _playerUIController = GetComponent<PlayerUIController>();
         _playerUIController.UpdateHealth(_health, _maxHealth);
+        _playerUIController.UpdateCoinText(coinCounter + "/" + coinsInLevel);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,7 +50,8 @@ public class PlayerStats : MonoBehaviour
                 }
             case "Coin":
                 {
-                    CoinCounter++;
+                    coinCounter++;
+                    _playerUIController.UpdateCoinText(coinCounter + "/" + coinsInLevel);
                     Destroy(collision.gameObject);
                     break;
                 }
