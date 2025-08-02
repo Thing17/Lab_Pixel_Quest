@@ -7,13 +7,15 @@ public class Teleport : MonoBehaviour
 {
     public string sceneName;
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         switch (collision.gameObject.tag)
         {
             case "Player":
+                { 
                 SceneManager.LoadScene(sceneName);
                 break;
+                }
         }
     }
 }
